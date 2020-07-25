@@ -1,0 +1,207 @@
+#include <avr/io.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <util/delay.h>
+
+/*void ADC_init(void)
+{
+	ADMUX |= (1<<REFS0) | (1<<MUX2) |(0<<MUX1) |(1<<MUX0);
+	ADCSRA |= (1<<ADEN) | (1<<ADSC) | (0<<ADATE) | (0<<ADIE) | (1<<ADPS2) | (0<<ADPS1)| (1<<ADPS0);
+}*/
+
+int main (void)
+{
+	ADMUX |= (1<<REFS0) | (1<<MUX2) |(0<<MUX1) |(1<<MUX0);
+	ADCSRA |= (1<<ADEN) | (1<<ADSC) | (0<<ADATE) | (0<<ADIE) | (1<<ADPS2) | (0<<ADPS1)| (1<<ADPS0);
+	DDRB = 0b00000001;
+	
+	uint16_t input = ADC;
+	
+	while(1)
+	{
+		PORTB = 0b00000001;
+		uint16_t input = ADC;
+		//Test: Full time
+		if ((input >= 0x0000) & (input <= 0x0028))
+		{
+			PORTB = 0b00000001;
+			_delay_us(7645*1.25);
+			PORTB = 0b00000000;
+			_delay_us(7645*1.25);
+		}
+		//Below cases are half time until commented otherwise
+		else if ((input >= 0x0029) & (input <= 0x0051))
+		{
+			PORTB = 0b00000001;
+			_delay_us(7215*1.248);
+			PORTB = 0b00000000;
+			_delay_us(7215*1.248);
+		}
+		else if ((input >= 0x0052) & (input <= 0x007A))
+		{
+			PORTB = 0b00000001;
+			_delay_us(6810*1.246);
+			PORTB = 0b00000000;
+			_delay_us(6810*1.246);
+		}
+		else if ((input >= 0x007B) & (input <= 0x00A3))
+		{
+			PORTB = 0b00000001;
+			_delay_us(6428*1.244);
+			PORTB = 0b00000000;
+			_delay_us(6428*1.244);
+		}
+		else if ((input >= 0x00A4) & (input <= 0x00CC))
+		{
+			PORTB = 0b00000001;
+			_delay_us(6067*1.242);
+			PORTB = 0b00000000;
+			_delay_us(6067*1.242);
+		}
+		else if ((input >= 0x00CD) & (input <= 0x00F5))
+		{
+			PORTB = 0b00000001;
+			_delay_us(5727*1.240);
+			PORTB = 0b00000000;
+			_delay_us(5727*1.240);
+		}
+		else if ((input >= 0x00F6) & (input <= 0x011E))
+		{
+			PORTB = 0b00000001;
+			_delay_us(5405*1.238);
+			PORTB = 0b00000000;
+			_delay_us(5405*1.238);
+		}
+		else if ((input >= 0x011F) & (input <= 0x0147))
+		{
+			PORTB = 0b00000001;
+			_delay_us(5102*1.236);
+			PORTB = 0b00000000;
+			_delay_us(5102*1.236);
+		}
+		else if ((input >= 0x0148) & (input <= 0x0170))
+		{
+			PORTB = 0b00000001;
+			_delay_us(4816*1.234);
+			PORTB = 0b00000000;
+			_delay_us(4816*1.234);
+		}
+		else if ((input >= 0x0171) & (input <= 0x0199))
+		{
+			PORTB = 0b00000001;
+			_delay_us(4545*1.232);
+			PORTB = 0b00000000;
+			_delay_us(4545*1.232);
+		}
+		else if ((input >= 0x019A) & (input <= 0x01C2))
+		{
+			PORTB = 0b00000001;
+			_delay_us(4290*1.230);
+			PORTB = 0b00000000;
+			_delay_us(4290*1.230);
+		}
+		else if ((input >= 0x01C3) & (input <= 0x01EB))
+		{
+			PORTB = 0b00000001;
+			_delay_us(4050*1.228);
+			PORTB = 0b00000000;
+			_delay_us(4050*1.228);
+		}
+		else if ((input >= 0x01EC) & (input <= 0x0214))
+		{
+			PORTB = 0b00000001;
+			_delay_us(3822*1.226);
+			PORTB = 0b00000000;
+			_delay_us(3822*1.226);
+		}
+		else if ((input >= 0x0215) & (input <= 0x023D))
+		{
+			PORTB = 0b00000001;
+			_delay_us(3608*1.224);
+			PORTB = 0b00000000;
+			_delay_us(3608*1.224);
+		}
+		else if ((input >= 0x023E) & (input <= 0x0266))
+		{
+			PORTB = 0b00000001;
+			_delay_us(3405*1.222);
+			PORTB = 0b00000000;
+			_delay_us(3405*1.222);
+		}
+		else if ((input >= 0x0267) & (input <= 0x028F))
+		{
+			PORTB = 0b00000001;
+			_delay_us(3214*1.220);
+			PORTB = 0b00000000;
+			_delay_us(3214*1.220);
+		}
+		else if ((input >= 0x0290) & (input <= 0x02B8))
+		{
+			PORTB = 0b00000001;
+			_delay_us(3034*1.218);
+			PORTB = 0b00000000;
+			_delay_us(3034*1.218);
+		}
+		else if ((input >= 0x02B9) & (input <= 0x02E1))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2863*1.216);
+			PORTB = 0b00000000;
+			_delay_us(2863*1.216);
+		}
+		else if ((input >= 0x02E2) & (input <= 0x030A))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2703*1.214);
+			PORTB = 0b00000000;
+			_delay_us(2703*1.214);
+		}
+		else if ((input >= 0x030B) & (input <= 0x0333))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2551*1.212);
+			PORTB = 0b00000000;
+			_delay_us(2551*1.212);
+		}
+		else if ((input >= 0x0334) & (input <= 0x035C))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2408*1.210);
+			PORTB = 0b00000000;
+			_delay_us(2408*1.210);
+		}
+		else if ((input >= 0x035D) & (input <=  0x0385))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2273*1.208);
+			PORTB = 0b00000000;
+			_delay_us(2273*1.208);
+		}
+		else if ((input >= 0x0386) & (input <= 0x03AE))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2145*1.206);
+			PORTB = 0b00000000;
+			_delay_us(2145*1.206);
+		}
+		else if ((input >= 0x03AF) & (input <=  0x03D7))
+		{
+			PORTB = 0b00000001;
+			_delay_us(2025*1.204);
+			PORTB = 0b00000000;
+			_delay_us(2025*1.204);
+		}
+		else if ((input >= 0x03D8) & (input <= 0x03FF))
+		{
+			PORTB = 0b00000001;
+			_delay_us(1911*1.202);
+			PORTB = 0b00000000;
+			_delay_us(1911*1.202);
+		}
+		//Set the ADSC bit to 1 again when it’s not
+		while(!(ADCSRA & 0b01000000))
+		{
+			ADCSRA |= (1<<ADSC);
+		}
+	}
+}
