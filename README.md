@@ -4,6 +4,7 @@ The point of this project was to create a potentiomter that is capable of changi
 pull-up resistance.
 
 The project was made for ECE 231 - UMass Amherst in 2020
+
 Contributors:
 Luan Vo - luanvo@umass.edu
 Jeffrey Matheson - jmatheson@umass.edu
