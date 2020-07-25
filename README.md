@@ -6,5 +6,4 @@ pull-up resistance.
 The project was made for ECE 231 - UMass Amherst in 2020
 
 Contributors:
-Luan Vo - luanvo@umass.edu
-Jeffrey Matheson - jmatheson@umass.edu
+Luan Vo - luanvo@umass.edu and Jeffrey Matheson - jmatheson@umass.edu
